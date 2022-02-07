@@ -1,5 +1,2 @@
 # starter_folder
-
-This repo....
-
-It is organised as follows...
+This paper is going to discuss the population of homeless people based on data provided by Shelter Management Information System (SMIS). In our data analysis, we are about to discuss the our topic from three aspects. First, we are going to analyze the distribution of different social group of homeless people. Then, we are going to explore the monthly enter and exit headcount of city funded shelter. What's more, we will also discuss the population of newly identified people using shelter and the population change in actively homeless people. This paper aims to explore the reasons and causes behind homeless problem in Toronto.

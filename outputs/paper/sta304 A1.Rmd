@@ -14,7 +14,7 @@ knitr::opts_chunk$set(echo = TRUE)
 library(tidyverse)
 library(kableExtra)
 library(opendatatoronto)
-library(dplyr)
+library(dplyr) #load packages needed
 
 # get package
 package <- show_package("ac77f532-f18b-427c-905c-4ae87ce69c93")
@@ -33,9 +33,9 @@ data
 ```{r 111,include=FALSE, echo=FALSE,message=FALSE,warning=FALSE}
 #data cleaning#
 cleaned_data <- data %>% filter(!is.na(data))%>%
-  mutate(total_enter=returned_from_housing+newly_identified+returned_to_shelter, total_leave=no_recent_shelter_use+moved_to_housing)%>%
-  mutate(year=substr(`date(mmm-yy)`, 5, nchar(`date(mmm-yy)`)))%>%
-  select(year,`date(mmm-yy)`, population_group, population_group_percentage,actively_homeless, newly_identified, total_enter,total_leave,`date(mmm-yy)`)
+  mutate(total_enter=returned_from_housing+newly_identified+returned_to_shelter, total_leave=no_recent_shelter_use+moved_to_housing)%>% #create two new variable total enter and total leave
+  mutate(year=substr(`date(mmm-yy)`, 5, nchar(`date(mmm-yy)`)))%>% #create variable year
+  select(year,`date(mmm-yy)`, population_group, population_group_percentage,actively_homeless, newly_identified, total_enter,total_leave,`date(mmm-yy)`) #select variables needed
 ```
 
 # 1. Introduction
@@ -71,6 +71,7 @@ summary_table<- cleaned_data%>% filter(population_group!="All Population")%>%gro
 ```
 
 ```{r 333, echo=FALSE, fig.cap = "A table"}
+#generate a table
 knitr::kable(summary_table, caption = "Summerise of Population group and population percentage")%>%
   kable_styling(latex_options="HOLD_position")
 ```
@@ -83,16 +84,19 @@ What's more, it is noticed that the group of single adult on percentage of makes
 Variable Total enter refers to the total number of people who uses the shelter system in one month, which include all three types of people who enter the shelter: Newly identified, Returned from Permanent Housing and Returned to Shelter. Total leave refers to the total number of people who leave the shelter system in one month, which include two types of people: Moved to Permanent Housing and No Recent Shelter Use [@E]. The graphical summary of the two variables is shown as below^[https://github.com/BellaTang12/304-paper1]:\
 
 ```{r 444,echo=FALSE,message=FALSE,warning=FALSE, fig.cap="A histogram",fig.width=6, fig.height=3}
+#generate a histogram 
 cleaned_data %>% filter(population_group!="All Population")%>% ggplot(aes(x=total_enter,fill= population_group))+geom_histogram(position = "dodge")+theme_light()+labs(x="Total enter",title = "A histogram of total enter")
 ```
 
 ```{r 555,echo=FALSE,message=FALSE,warning=FALSE, fig.cap = "A histogram", fig.width=6, fig.height=3}
+#generate a histogram 
 cleaned_data %>% filter(population_group!="All Population")%>% ggplot(aes(x=total_leave,fill= population_group))+geom_histogram(position = "dodge")+theme_light()+labs(x="Total leave",title = "A histogram of total leave")
 ```
-
+\newpage
 The first two histograms shows the distribution of total enter and total leave with respect to different population groups. In the graphs, different population groups are highlighted with different color. From the two histogram, we can see that the count for youth shown by color pink are both high in total enter an total leave, which indicates that the population of youth are more likely to be homeless and use the shelter for a short time. As for population group of families, we can find that the total leave of familes is higher than total enter by comparing the two histogram. This indicates that families have a high possibility of getting rid of homeless than individuals. This may because families usually have more money to afford the rent and to move to a house.\
 
 ```{r 666,echo=FALSE,message=FALSE,warning=FALSE, fig.cap="A scatterplot",fig.width=6,fig.height=3}
+#generate a scatterplot
 cleaned_data %>% filter(population_group!="All Population")%>% ggplot(aes(x=total_leave,y=total_enter, colour=population_group))+geom_point()+theme_light()+labs(x="total leave",y="total enter",title = "A scatterplot between between total leave and total enter")
 ```
 
@@ -103,6 +107,7 @@ Then, the scatter plot shows the relationship between total enter and total leav
 The variable active homeless refers to people who have used the shelter system at least one time in the past three months and did not move to permanent housing. Variable newly identified refers to people who entered the shelter system for the first time [@E].
 Graphical summaries of the two variable is shown below^[https://github.com/BellaTang12/304-paper1]:\
 ```{r 777,echo=FALSE,message=FALSE,warning=FALSE, fig.cap = "A graph",fig.width=6,fig.height=3}
+#generate two graph
 cleaned_data%>% group_by(year)%>%ggplot(aes(y=`date(mmm-yy)`,x=actively_homeless,fill=population_group))+geom_col()+theme_light()+labs(y="Date",x="Actively homeless",title = "Actively homeless 2020-2021" )+facet_wrap(~year)
 ```
 ```{r 888,echo=FALSE,message=FALSE,warning=FALSE, fig.cap="A graph",fig.width=6,fig.height=4}
