@@ -1,7 +1,7 @@
 ---
 title: "Homeless population in Toronto"
 author: "Xuetong Tang 1005682174"
-date: "2/5/2022"
+date: "2/6/2022"
 output: pdf_document
 abstract: "Homeless population is an important index to measure one city's degree of happiniess. This paper explores the total homeless population and the different population groups in total homeless population in the city of Toronto by analyzing data provided by Toronto's Shelter Management Information System (SMIS). Single Adult has make up the majority of homeless population in Toronto. While the total homeless population in Toronto doesn't show obvious trend of increasing or decreasing in long term from 2021 to 2021, it do have some increaing trend in the short run from Septermber to November in 2021."
 bibliography: ref_list.bib
